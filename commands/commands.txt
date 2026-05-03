@@ -1,0 +1,21 @@
+# Download installer
+curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
+
+# Install Wazuh
+sudo bash wazuh-install.sh -a
+
+# Check services
+sudo systemctl status wazuh-manager
+sudo systemctl status wazuh-indexer
+sudo systemctl status wazuh-dashboard
+
+# Restart services (if needed)
+sudo systemctl restart wazuh-manager
+sudo systemctl restart wazuh-indexer
+sudo systemctl restart wazuh-dashboard
+
+# Verify agent connection (IMPORTANT)
+sudo /var/ossec/bin/agent_control -l
+
+# Test indexer
+curl -k https://127.0.0.1:9200
